@@ -5,7 +5,8 @@ A list of venues and sorting them in new way
 1.Clone Project
 2.Create a Database using the name "venue_wise", or it can be customized by editing the .env file
 3.Open the project folder, then open the terminal / cmd and type the command "composer update"
-4.Open the database folder => seeders => DatabaseSeeder.php then edit the username and password according to taste
+4.Open the database folder => seeders => DatabaseSeeder.php then edit the username and password according to taste (
+email:admin@gmail.com- pass:123)
 5.Open the terminal / cmd and type the command "php artisan migrate:fresh --seed"
 
 Description:

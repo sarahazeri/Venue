@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
         Weight::factory()->count(300)->create();
         $password = bcrypt('123');
         User::create([
-            'name' => 'Sara',
-            'email' => 'sara@mail.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => $password,
             'remember_token' => Str::random(10),
