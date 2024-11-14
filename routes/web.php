@@ -6,6 +6,7 @@ use App\Http\Controllers\CrudController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\VenuesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/venues/filter', [VenuesController::class, 'showFilterPage'])->name('venues.filter.page');
+Route::get('/venues/filter/results', [VenuesController::class, 'filterByEventType'])->name('venues.filter');
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,3 +43,4 @@ Route::post('/dashboard/crudAjax/store', [CrudAjaxController::class, 'store'])->
 Route::post('/dashboard/crudAjax/show', [CrudAjaxController::class, 'show'])->name('crudAjax_show');
 Route::post('/dashboard/crudAjax/update', [CrudAjaxController::class, 'update'])->name('crudAjax_update');
 Route::post('/dashboard/crudAjax/destroy', [CrudAjaxController::class, 'destroy'])->name('crudAjax_destroy');
+

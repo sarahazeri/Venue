@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('/{category}/ids', [\App\Http\Controllers\VenuesController::class, 'getCategoryIds']);
+Route::get('/filterVenues', [\App\Http\Controllers\VenuesController::class, 'filterVenues'])->name('filter-venues');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

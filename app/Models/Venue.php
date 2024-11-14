@@ -16,18 +16,18 @@ class Venue extends Model
     ];
 
     // Define relationships
-    public function propertyType()
+    public function propertyTypes()
     {
-        return $this->belongsTo(PropertyType::class);
+        return $this->belongsTo(PropertyType::class, 'id', 'venues_id');
     }
 
-    public function venueType()
+    public function venueTypes()
     {
-        return $this->belongsTo(VenueType::class);
+        return $this->belongsTo(VenueType::class, 'id', 'venues_id');
     }
 
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'venues_id', 'id'); // استفاده از venues_id به عنوان کلید خارجی
     }
 }

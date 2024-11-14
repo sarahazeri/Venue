@@ -15,7 +15,7 @@ class CrudController extends Controller
 
     public function index()
     {
-        $venues = Venue::orderBy('sortid', 'desc')->get();
+        $venues = Venue::orderBy('sortid')->get();
         return view('dashboard.crud', compact('venues'));
     }
 

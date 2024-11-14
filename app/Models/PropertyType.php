@@ -9,4 +9,9 @@ class PropertyType extends Model
 {
     protected $table = 'propertytypes';
     use HasFactory;
+
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class, 'venues_id', 'id'); // venues_id به عنوان کلید خارجی
+    }
 }

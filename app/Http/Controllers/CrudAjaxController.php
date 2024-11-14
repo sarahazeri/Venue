@@ -12,7 +12,7 @@ class CrudAjaxController extends Controller
     //
     public function index()
     {
-        $data = Venue::orderBy('sortid', 'desc')->get();
+        $data = Venue::orderBy('sortid')->get();
         if (request()->ajax()) {
             return datatables()->of($data)
                 ->addColumn('Aksi', function ($data) {

@@ -9,4 +9,9 @@ class VenueType extends Model
 {
     protected $table = 'venueTypes';
     use HasFactory;
+
+    public function venue()
+    {
+        return $this->belongsTo(Venue::class, 'venues_id', 'id'); // venues_id به عنوان کلید خارجی
+    }
 }

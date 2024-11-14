@@ -28,13 +28,13 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         Venue::factory(30)->create();
-        VenueType::factory()->count(10)->create();
-        PropertyType::factory()->count(10)->create();
-        Event::factory()->count(10)->create();
+        VenueType::factory()->count(30)->create();
+        PropertyType::factory()->count(30)->create();
+        Event::factory()->count(30)->create();
         EventList::factory()->count(5)->create();
         PropertyTypeList::factory()->count(5)->create();
         VenueTypeList::factory()->count(5)->create();
-        Weight::factory()->count(30)->create();
+        Weight::factory()->count(300)->create();
         $password = bcrypt('123');
         User::create([
             'name' => 'Sara',
