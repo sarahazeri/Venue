@@ -8,6 +8,7 @@ use App\Models\PropertyType;
 use App\Models\PropertyTypeList;
 use App\Models\VenueType;
 use App\Models\VenueTypeList;
+use App\Models\Weight;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
         EventList::factory()->count(5)->create();
         PropertyTypeList::factory()->count(5)->create();
         VenueTypeList::factory()->count(5)->create();
+        Weight::factory()->count(30)->create();
         $password = bcrypt('123');
         User::create([
             'name' => 'Sara',
