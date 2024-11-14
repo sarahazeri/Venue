@@ -5,13 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Venues extends Model
+class VenueTypeList extends Model
 {
+    protected $table = 'venueTypelists';
     use HasFactory;
-
-    protected $table = 'venues';
-    protected $fillable = [
-        'title',
-        'address',
-    ];
 }

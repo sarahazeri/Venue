@@ -2,11 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Event;
+use App\Models\EventList;
+use App\Models\PropertyType;
+use App\Models\PropertyTypeList;
+use App\Models\VenueType;
+use App\Models\VenueTypeList;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\Venues;
+use App\Models\Venue;
 
 
 class DatabaseSeeder extends Seeder
@@ -20,8 +26,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        Venues::factory(30)->create();
-
+        Venue::factory(30)->create();
+        VenueType::factory()->count(10)->create();
+        PropertyType::factory()->count(10)->create();
+        Event::factory()->count(10)->create();
+        EventList::factory()->count(5)->create();
+        PropertyTypeList::factory()->count(5)->create();
+        VenueTypeList::factory()->count(5)->create();
         $password = bcrypt('123');
         User::create([
             'name' => 'Sara',

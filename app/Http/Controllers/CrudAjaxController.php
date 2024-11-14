@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Venues;
+use App\Models\Venue;
 
 use Illuminate\Http\Request;
 use DataTables;
@@ -12,7 +12,7 @@ class CrudAjaxController extends Controller
     //
     public function index()
     {
-        $data = Venues::orderBy('id', 'desc')->get();
+        $data = Venue::orderBy('sortid', 'desc')->get();
         if (request()->ajax()) {
             return datatables()->of($data)
                 ->addColumn('Aksi', function ($data) {
@@ -50,7 +50,7 @@ class CrudAjaxController extends Controller
         //     'message' => 'Data berhasil ditambahkan'
         // );
 
-        $data = new Venues;
+        $data = new Venue;
         $data->title = $request->title;
         $data->address = $request->address;
         $data->save();
@@ -60,7 +60,7 @@ class CrudAjaxController extends Controller
     public function show(Request $request)
     {
         $id = $request->id;
-        $data = Venues::find($id);
+        $data = Venue::find($id);
         return response()->json(['data' => $data]);
     }
 
@@ -72,7 +72,7 @@ class CrudAjaxController extends Controller
             'address' => $request->address
         ];
 
-        $data = Venues::find($id);
+        $data = Venue::find($id);
         $data->update($update);
         $data->save();
 
@@ -84,7 +84,7 @@ class CrudAjaxController extends Controller
     public function destroy(Request $request)
     {
         $id = $request->id;
-        $data = Venues::find($id);
+        $data = Venue::find($id);
         $data->delete();
 
         return response()->json(['data' => $data]);

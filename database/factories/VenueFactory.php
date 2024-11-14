@@ -3,12 +3,12 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Venues;
+use App\Models\Venue;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class VenuesFactory extends Factory
+class VenueFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,7 +16,7 @@ class VenuesFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected $model = Venues::class;
+    protected $model = Venue::class;
     private static $sortValue = 1;
 
     public function definition()

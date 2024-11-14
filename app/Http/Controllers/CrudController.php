@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Venues;
+use App\Models\Venue;
 
 class CrudController extends Controller
 {
@@ -15,7 +15,7 @@ class CrudController extends Controller
 
     public function index()
     {
-        $venues = Venues::orderBy('id', 'desc')->get();
+        $venues = Venue::orderBy('sortid', 'desc')->get();
         return view('dashboard.crud', compact('venues'));
     }
 
@@ -30,7 +30,7 @@ class CrudController extends Controller
             'address.required' => 'Address tidak boleh kosong',
         ]);
 
-        $data = new Venues;
+        $data = new Venue;
         $data->title = $request->title;
         $data->address = $request->address;
         $data->save();
@@ -54,7 +54,7 @@ class CrudController extends Controller
             'title.required' => 'Title tidak boleh kosong',
             'address.required' => 'Address tidak boleh kosong',
         ]);
-        $data = Venues::find($request->id);
+        $data = Venue::find($request->id);
         $data->title = $request->title;
         $data->address = $request->address;
         $data->save();
@@ -71,7 +71,7 @@ class CrudController extends Controller
 
     public function destroy(Request $request)
     {
-        $data = Venues::find($request->id);
+        $data = Venue::find($request->id);
         $data->delete();
 
         $notification = array(
