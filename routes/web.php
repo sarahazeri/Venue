@@ -21,9 +21,7 @@ use App\Http\Controllers\VenuesController;
 Route::get('/venues/filter', [VenuesController::class, 'showFilterPage'])->name('venues.filter.page');
 Route::get('/venues/filter/results', [VenuesController::class, 'filterByEventType'])->name('venues.filter');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [VenuesController::class, 'showFilterPage']);
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'auth'])->name('auth');
