@@ -28,10 +28,11 @@
                     <label for="categoryDropdown">Select Category:</label>
                     <select id="categoryDropdown" name="category" class="form-control">
                         <option value="">-- Select Category --</option>
-                        <option value="events">Event Type</option>
-                        <option value="propertytypes">Property Type</option>
-                        <option value="venuetypes">Venue Type</option>
-                        <!-- Add more categories as needed -->
+                        @if(isset($categories) && $categories->count() > 0)
+                            @foreach($categories as $category)
+                                <option value="{{ $category['name'] }}">{{ $category['title'] }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
 

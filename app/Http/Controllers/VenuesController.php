@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventList;
-use App\Models\PropertyTypeList;
-use App\Models\Venue;
-use App\Models\VenueTypeList;
 use App\Repositories\VenuesRepository;
 use Illuminate\Http\Request;
+use App\Support\CategoryList;
 
 class VenuesController extends Controller
 {
@@ -28,19 +25,20 @@ class VenuesController extends Controller
     public function showFilterPage()
     {
         // Get categories with their respective IDs for the first dropdown
-        $categories = [
-            'venuetypes' => \App\Models\VenueTypeList::all(['id', 'name']),
-            'propertytypes' => \App\Models\PropertyTypeList::all(['id', 'name']),
-            'events' => \App\Models\EventList::all(['id', 'name']),
-        ];
+        $categories = CategoryList::all();
         $venues = $this->venuesRepository->getAllVenues();
+
         return view('venues.filtered', compact('venues', 'categories'));
     }
 
+    //Now the filtering is being applied as Ajax. If you want to exit the Ajax mode, this method should be used
     public function filterByEventType(Request $request)
     {
+        $categories = CategoryList::all();
+        $categoryNames = $categories->pluck('name');
+        $categoryList = $categoryNames->implode($key = ',');
         $request->validate([
-            'category' => 'required|string|in:venuetypes,propertytypes,events',
+            'category' => 'required|string|in:' . $categoryList,
             'categoryId' => 'required|integer',
         ]);
 
@@ -48,31 +46,15 @@ class VenuesController extends Controller
         $categoryId = $request->input('categoryId');
 
         // Fetch venues based on selected category and categoryId
-        $venues = Venue::whereHas($category, function ($query) use ($categoryId) {
-            $query->where('id', $categoryId);
-        })->get();
+        $venues = $this->venuesRepository->getVenuesByEventType($category, $categoryId);
+
         return view('venues.filtered', compact('venues', 'category', 'categoryId'));
     }
 
     public function getCategoryIds($category)
     {
-        switch ($category) {
-            case 'events':
-                $items = EventList::select('id', 'name')->get();
-                break;
-
-            case 'propertytypes':
-                $items = PropertyTypeList::select('id', 'name')->get();
-                break;
-
-            case 'venuetypes':
-                $items = VenueTypeList::select('id', 'name')->get();
-                break;
-
-            default:
-                return response()->json(['error' => 'Invalid category'], 400);
-        }
-
+        $category = CategoryList::findByName($category);
+        $items = $category['model']::select('id', 'name')->get();
         return response()->json($items);
     }
 
